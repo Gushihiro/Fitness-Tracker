@@ -8,42 +8,35 @@ const WorkoutSchema = new Schema({
 },
 exercises: [
     {
-        type: Schema.Types.ObjectId,
-        ref: "Exercise",
+        type: {
+            type: String,
+            trim: true,
+            required: "A Type is required",
+        },
+        name: {
+            type: String,
+            trim: true,
+            required: "A name is required",
+        },
+        duration: {
+            type: Number,
+        },
+        weight: {
+            type: Number,
+        },
+        reps: {
+            type: Number,
+        },
+        sets: {
+            type: Number,
+        },
+        distance: {
+            type: Number,
+        }
     }
 ],
 
-totalDuration: Number,
-totalDistance: Number,
-totalWeight: Number,
-totalSets: Number,
-totalReps: Number,
-
-
 });
-
-WorkoutSchema.methods.addDurations = function () {
-    let totalDuration = 0;
-    for (var i = 0; i < exercises.length; i++) {
-        totalDuration += this.exercises[i].duration;
-    }
-    return totalDuration;
-}
-WorkoutSchema.methods.addDistance = function () {
-    let totalDistance = 0;
-    for (var i = 0; i < exercises.length; i++) {
-        totalDistance += this.exercises[i].duration;
-    }
-    return totalDistance;
-}
-WorkoutSchema.methods.addWeights = function () {
-    let totalWeights = 0;
-    for (var i = 0; i < exercises.length; i++) {
-        totalWeights += this.exercises[i].duration;
-    }
-    return totalWeights;
-}
-
 const Workout = mongoose.model ("Workout", WorkoutSchema);
 
 module.exports = Workout;
